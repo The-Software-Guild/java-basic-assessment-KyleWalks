@@ -13,8 +13,9 @@ import java.util.*;
 public class RockPaperScissors {
 
     public static void main(String[] args) {
+        System.out.println("Welcome to Rock, Paper, Scissors!");
         while (playGame());
-        System.out.println("Thank you for playing.");
+        System.out.println("\nThank you for playing.");
     }
 
     /**
@@ -87,13 +88,13 @@ public class RockPaperScissors {
         }
 
         // Tally the scores
-        System.out.println("The final scores are:");
+        System.out.println("\nThe final scores are:");
         System.out.printf("%10s%10s%10s\n", "Wins", "Losses", "Ties");
         System.out.printf("User: %d%10d%10d\n", playerScore[0], playerScore[1], playerScore[2]);
         System.out.printf("Comp: %d%10d%10d\n", compScore[0], compScore[1], compScore[2]);
 
         // Ask if they want to play again
-        System.out.print("Would you like to play again(y, n)? ");
+        System.out.print("\nWould you like to play again(y, n)? ");
 
         if (input.nextLine().equals("y")) {
             return true;
