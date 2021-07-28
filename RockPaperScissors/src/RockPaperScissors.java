@@ -41,6 +41,7 @@ public class RockPaperScissors {
 
         // User round specification
         int rounds = 0;
+
         while (rounds <= 0 || rounds > 10) {
             try {
                 System.out.print("How many rounds would you like to play(max 10)? ");
@@ -65,25 +66,31 @@ public class RockPaperScissors {
             String compChoice = options.get(rand.nextInt(3));
             System.out.println("The computer chose " + compChoice + ".");
 
-            // Display result of round (user win: true, comp win: false, tie: null)
-            try {
-                boolean result = compare(userChoice, compChoice);
+            // Display result of round (user win: 1, user loss: 0, tie: 2)
+            int result = compare(userChoice, compChoice);
 
-                if (result) {
-                    System.out.println("You won this round!");
-                    playerScore[0] += 1;
-                    compScore[1] += 1;
-                } else {
+            switch (result) {
+                // Loss
+                case 0:
                     System.out.println("You lost this round.");
                     compScore[0] += 1;
                     playerScore[1] += 1;
-                }
 
-            } catch (NullPointerException e) {
-                playerScore[2] += 1;
-                compScore[2] += 1;
+                    break;
+                // Win
+                case 1:
+                    System.out.println("You won this round!");
+                    playerScore[0] += 1;
+                    compScore[1] += 1;
 
-                System.out.println("It is a tie!");
+                    break;
+                // Tie
+                default:
+                    System.out.println("It is a tie!");
+                    playerScore[2] += 1;
+                    compScore[2] += 1;
+
+                    break;
             }
         }
 
@@ -130,35 +137,34 @@ public class RockPaperScissors {
      * Takes the user's and computer's move choice
      * and compares them to reach a result.
      *
-     *
      * @param userChoice User's move
      * @param compChoice Computer's move
-     * @return Result of round; true=win false=loss null=tie
+     * @return Result of round; 0=loss 1=win 2=tie
      */
-    public static Boolean compare(String userChoice, String compChoice) {
+    public static int compare(String userChoice, String compChoice) {
         if (userChoice.equals("rock")) {
             if (compChoice.equals("paper"))
-                return false;
+                return 0;
             else if (compChoice.equals("scissors"))
-                return true;
+                return 1;
             else
-                return null;
+                return 2;
 
         } else if (userChoice.equals("paper")) {
             if (compChoice.equals("rock"))
-                return true;
+                return 1;
             else if (compChoice.equals("scissors"))
-                return false;
+                return 0;
             else
-                return null;
+                return 2;
 
         } else {
             if (compChoice.equals("paper"))
-                return true;
+                return 1;
             else if (compChoice.equals("rock"))
-                return false;
+                return 0;
             else
-                return null;
+                return 2;
         }
     }
 
